@@ -1,0 +1,5 @@
+CREATE TABLE tb_groups (
+  id_group int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(255) DEFAULT NULL,
+  PRIMARY KEY (id_group)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

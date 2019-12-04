@@ -1,0 +1,2 @@
+INSERT INTO tb_groups VALUES (NULL, 'USER');
+INSERT INTO tb_groups VALUES (NULL, 'ADMIN');

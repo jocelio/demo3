@@ -1,0 +1,5 @@
+CREATE TABLE tb_rules (
+  id_rule int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(255) DEFAULT NULL,
+  PRIMARY KEY (id_rule)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
