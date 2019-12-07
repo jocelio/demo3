@@ -13,7 +13,7 @@ import static org.springframework.http.HttpStatus.*;
 
 
 @RestController()
-@RequestMapping("${prefix}/v1/groups")
+@RequestMapping("api/v1/groups")
 public class GroupController {
 
     @Autowired

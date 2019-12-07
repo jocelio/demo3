@@ -10,7 +10,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 public class HelloPrivateResource {
 
-    @RequestMapping(value = "${prefix}/private", method = GET)
+    @RequestMapping(value = "api/private", method = GET)
     public ResponseEntity<String> listar() {
         return new ResponseEntity<String>("private", OK);
     }

@@ -19,21 +19,17 @@ import static org.springframework.http.HttpStatus.*;
 
 
 @RestController()
-@RequestMapping("${prefix}/v1/users")
+@RequestMapping("api/v1/users")
 public class UserController {
 
     @Autowired
     UserRepository usersRepository;
 
     @Autowired
-    UserRuleRepository userRuleRepository;
-
-    @Autowired
     GroupRepository groupRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
-
 
     @GetMapping()
     public ResponseEntity getAll() {
@@ -47,36 +43,31 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody User user) {
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        List<Long> groupsId = user.getGroups().stream().map(Group::getId).collect(toList());
-        List<Group> groups = groupRepository.findByIdIn(groupsId);
-        user.setGroups(groups);
-
-        user.getUserRules().stream().forEach(ur -> ur.setUser(user));
-        User savedUser = usersRepository.save(user);
-
-        return ResponseEntity.status(CREATED).body(savedUser);
+        return ResponseEntity.status(CREATED).body(this.saveUser(user));
     }
 
     @PutMapping("{id}")
     public ResponseEntity update(@PathVariable(value = "id") Long id, @RequestBody User user) {
         user.setId(id);
-
-        List<Long> groupsId = user.getGroups().stream().map(Group::getId).collect(toList());
-        List<Group> groups = groupRepository.findByIdIn(groupsId);
-        user.setGroups(groups);
-
-        user.getUserRules().stream().forEach(ur -> ur.setUser(user));
-
-        return ResponseEntity.status(CREATED).body(usersRepository.save(user));
+        return ResponseEntity.status(CREATED).body(this.saveUser(user));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity delete(@PathVariable(value = "id") Long id) {
         usersRepository.deleteById(id);
         return ResponseEntity.status(NO_CONTENT).build();
+    }
+
+    private User saveUser(User user){
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        List<Long> groupsId = user.getGroups().stream().map(Group::getId).collect(toList());
+        List<Group> groups = groupRepository.findByIdIn(groupsId);
+        user.setGroups(groups);
+
+        user.getUserRules().stream().forEach(ur -> ur.setUser(user));
+
+        return usersRepository.save(user);
     }
 
 }
