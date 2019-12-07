@@ -5,38 +5,16 @@ import com.example.demo3.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.PUT;
-
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().antMatchers(GET, "/private/**").hasRole("ADMIN")
-//                .and()
-//                .csrf()
-//                .disable()
-//                .formLogin().disable();
-//    }
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("password").roles("USER")
-//                .and()
-//                .withUser("admin").password("password").roles("USER", "ADMIN");
-//    }
 
     @Autowired
     JwtTokenProvider jwtTokenProvider;
@@ -55,11 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
             .authorizeRequests()
             .antMatchers("/auth/signin").permitAll()
-            .antMatchers(GET, "/public/**").permitAll()
-            .antMatchers(GET, "/switch/**").permitAll()
-            .antMatchers(PUT, "/switch/**").permitAll()
-            .antMatchers(GET, "/private/**").hasRole("ADMIN")
-            .antMatchers( "/users/**").hasRole("ADMIN")
+            .antMatchers("/api/v1/users/**").hasRole("ADMIN")
             .anyRequest().authenticated()
         .and()
         .apply(new JwtSecurityConfigurer(jwtTokenProvider));
