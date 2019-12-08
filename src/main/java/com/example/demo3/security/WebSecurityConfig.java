@@ -29,10 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         .httpBasic().disable()
         .csrf().disable()
+//        .cors().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
             .antMatchers("/auth/signin").permitAll()
+            .antMatchers("/me").permitAll()
             .antMatchers("/api/v1/users/**").hasRole("ADMIN")
             .antMatchers("/api/v1/groups/**").hasRole("ADMIN")
             .anyRequest().authenticated()
