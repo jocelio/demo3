@@ -14,7 +14,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addMapping("/**")
                 .allowedOrigins("https://shrouded-gorge-13128.herokuapp.com","http://localhost:3000")
                 .allowedMethods("PUT", "DELETE","GET","POST","OPTION")
-                .allowedHeaders("Origin", "Accept", "x-auth-token", " Content-Type", " Access-Control-Request-Method", " Access-Control-Request-Headers")
+                .allowedHeaders("*")
+                .exposedHeaders( "Authorization" )
                 .allowCredentials(true).maxAge(3600);
     }
 }
