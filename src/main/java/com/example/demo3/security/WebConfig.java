@@ -11,7 +11,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("*")
+        registry.addMapping("/**")
                 .allowedOrigins("https://shrouded-gorge-13128.herokuapp.com","http://localhost:3000")
                 .allowedMethods("PUT", "DELETE","GET","POST")
                 .allowCredentials(false).maxAge(3600);
