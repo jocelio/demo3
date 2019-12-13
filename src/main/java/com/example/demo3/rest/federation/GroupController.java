@@ -31,6 +31,7 @@ public class GroupController {
 
     @PostMapping
     public ResponseEntity create(@Valid @RequestBody Group group) {
+        group.setId(null);
         return ResponseEntity.status(CREATED).body(groupRepository.save(group));
     }
 

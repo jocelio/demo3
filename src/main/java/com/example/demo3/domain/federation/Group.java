@@ -34,8 +34,8 @@ public class Group {
     @NotEmpty
     private String name;
 
-    @OneToMany(fetch = LAZY, cascade = CascadeType.ALL, mappedBy = "groups")
     @JsonIgnore
+    @OneToMany(fetch = LAZY, cascade = CascadeType.DETACH, mappedBy = "groups")
     private List<User> users;
 
     @ManyToMany(fetch = EAGER)
