@@ -26,7 +26,7 @@ public class GroupController {
 
     @GetMapping("{id}")
     public ResponseEntity get(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.status(CREATED).body(groupRepository.getOne(id));
+        return ResponseEntity.status(OK).body(groupRepository.getOne(id));
     }
 
     @PostMapping

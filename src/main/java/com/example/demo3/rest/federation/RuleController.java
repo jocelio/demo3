@@ -24,7 +24,7 @@ public class RuleController {
 
     @GetMapping("{id}")
     public ResponseEntity get(@PathVariable(value = "id") Long id) {
-        return ResponseEntity.status(CREATED).body(ruleRepository.getOne(id));
+        return ResponseEntity.status(OK).body(ruleRepository.getOne(id));
     }
 
 }

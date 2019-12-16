@@ -16,6 +16,8 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class Rule {
 
+    public Rule(Long id) {this.id = id;}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rule")
